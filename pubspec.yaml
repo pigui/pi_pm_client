@@ -64,6 +64,7 @@ dependencies:
   flutter_animated_button: ^2.0.3
   toastification: ^2.3.0
   font_awesome_flutter: ^10.7.0
+  skeletonizer: ^1.4.2
 
 dev_dependencies:
   flutter_test:
