@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class AuthInputTextField extends StatelessWidget {
@@ -24,6 +25,9 @@ class AuthInputTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z0-9\s@._-]*$')),
+        ],
         controller: controller,
         onChanged: onChange,
         obscureText: obscureText,
@@ -36,5 +40,8 @@ class AuthInputTextField extends StatelessWidget {
 InputDecoration _inputDecoration(
     {required String labelText, Widget? icon, String? errorText}) {
   return InputDecoration(
-      labelText: labelText, icon: icon, errorText: errorText);
+    labelText: labelText,
+    icon: icon,
+    errorText: errorText,
+  );
 }

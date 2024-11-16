@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pi_pm_client/core/common/app/singletons/user_logged.dart';
 import 'package:pi_pm_client/core/common/singletons/network.dart';
 import 'package:pi_pm_client/core/environments/environment.dart';
 import 'package:pi_pm_client/features/auth/data/datasources/auth_remote_datasource.dart';
