@@ -5,6 +5,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:pi_pm_client/features/auth/presentation/app/adapters/auth_bloc.dart';
 import 'package:pi_pm_client/features/auth/presentation/views/login_screen.dart';
 import 'package:pi_pm_client/features/auth/presentation/widgets/input_text.dart';
@@ -40,6 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: SingleChildScrollView(
                 child: BlocConsumer<AuthBloc, AuthState>(
                     listener: (context, state) {
+                      context.loaderOverlay.hide();
                       if (state is AuthError) {
                         toastification.show(
                           context:
@@ -49,6 +51,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           type: ToastificationType.error,
                           autoCloseDuration: const Duration(seconds: 5),
                         );
+                      }
+                      if (state is AuthLoading) {
+                        context.loaderOverlay.show();
                       }
                       if (state is AuthLogin) {
                         context.go(HomeView.path);
