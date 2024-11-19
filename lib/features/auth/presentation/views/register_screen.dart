@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pi_pm_client/features/auth/presentation/app/adapters/auth_bloc.dart';
 import 'package:pi_pm_client/features/auth/presentation/views/login_screen.dart';
 import 'package:pi_pm_client/features/auth/presentation/widgets/input_text.dart';
+import 'package:pi_pm_client/features/home/presentation/views/home_view.dart';
 import 'package:toastification/toastification.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -49,6 +50,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           autoCloseDuration: const Duration(seconds: 5),
                         );
                       }
+                      if (state is AuthLogin) {
+                        context.go(HomeView.path);
+                      }
                     },
                     builder: (context, state) => FormBuilder(
                           key: _formKey,
@@ -65,7 +69,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       validators:
                                           FormBuilderValidators.compose([
                                         FormBuilderValidators.required(),
-                                        FormBuilderValidators.email(),
                                       ]),
                                       labelText:
                                           translate('auth.login.first_name')),
@@ -80,7 +83,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       validators:
                                           FormBuilderValidators.compose([
                                         FormBuilderValidators.required(),
-                                        FormBuilderValidators.email(),
                                       ]),
                                       labelText:
                                           translate('auth.login.last_name')),

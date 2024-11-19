@@ -7,6 +7,7 @@ import 'package:pi_pm_client/features/auth/presentation/app/adapters/auth_bloc.d
 import 'package:pi_pm_client/features/auth/presentation/views/views.dart';
 import 'package:pi_pm_client/features/auth/presentation/widgets/input_text.dart';
 import 'package:gap/gap.dart';
+import 'package:pi_pm_client/features/home/presentation/views/home_view.dart';
 import 'package:toastification/toastification.dart';
 import 'package:go_router/go_router.dart';
 
@@ -46,6 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           type: ToastificationType.error,
                           autoCloseDuration: const Duration(seconds: 5),
                         );
+                      }
+                      if (state is AuthLogin) {
+                        context.go(HomeView.path);
                       }
                     },
                     builder: (context, state) => FormBuilder(

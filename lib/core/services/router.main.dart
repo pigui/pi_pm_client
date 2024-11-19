@@ -1,6 +1,7 @@
 part of 'router.dart';
 
-final rootNavigatorKey = GlobalKey<NavigatorState>();
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 _transitionsBuilder(
     {required Animation<double> animation,
@@ -27,7 +28,7 @@ _transitionsBuilder(
 }
 
 final router = GoRouter(
-  navigatorKey: rootNavigatorKey,
+  navigatorKey: _rootNavigatorKey,
   debugLogDiagnostics: true,
   initialLocation: '/',
   routes: [
@@ -54,6 +55,23 @@ final router = GoRouter(
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             _transitionsBuilder(animation: animation, child: child),
       ),
-    )
+    ),
+    ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) {
+          return DashboardScreen(state: state, child: child);
+        },
+        routes: [
+          GoRoute(
+            path: HomeView.path,
+            pageBuilder: (context, state) => CustomTransitionPage(
+              key: state.pageKey,
+              child: const HomeView(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      _transitionsBuilder(animation: animation, child: child),
+            ),
+          )
+        ])
   ],
 );
