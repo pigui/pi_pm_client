@@ -67,7 +67,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       required String firstName,
       required String lastName}) async {
     try {
-      final response = await http.post('${newtWork.apiUrl}$_registerEndpoint');
+      final response =
+          await http.post('${newtWork.apiUrl}$_registerEndpoint', data: {
+        "email": email,
+        "password": password,
+        "firstName": firstName,
+        "lastName": lastName
+      });
       if (response.data == null) {
         final int statusCode = response.statusCode ?? 500;
         throw ServerException(message: 'no data', statusCode: statusCode);

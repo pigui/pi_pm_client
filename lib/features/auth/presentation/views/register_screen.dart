@@ -55,7 +55,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (state is AuthLoading) {
                         context.loaderOverlay.show();
                       }
-                      if (state is AuthLogin) {
+                      if (state is AuthRegister) {
                         context.go(HomeView.path);
                       }
                     },

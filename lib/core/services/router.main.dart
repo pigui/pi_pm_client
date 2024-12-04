@@ -58,9 +58,12 @@ final router = GoRouter(
     ),
     ShellRoute(
         navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) {
-          return DashboardScreen(state: state, child: child);
-        },
+        pageBuilder: (context, state, child) => CustomTransitionPage(
+              child: DashboardScreen(state: state, child: child),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      _transitionsBuilder(animation: animation, child: child),
+            ),
         routes: [
           GoRoute(
             path: HomeView.path,
