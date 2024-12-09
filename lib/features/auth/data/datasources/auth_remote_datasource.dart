@@ -5,6 +5,7 @@ import 'package:pi_pm_client/core/common/singletons/network.dart';
 import 'package:pi_pm_client/core/errors/exceptions.dart';
 import 'package:pi_pm_client/features/auth/data/mappers/user_mapper.dart';
 import 'package:pi_pm_client/features/auth/data/models/user_model.dart';
+import 'dart:convert' as convert;
 
 abstract class AuthRemoteDataSource {
   Future<User> login({
@@ -35,7 +36,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<User> login({required String email, required String password}) async {
     try {
       final response = await http.post('${newtWork.apiUrl}$_loginEndpoint',
-          data: {"email": email, "password": password});
+          data: convert.jsonEncode({"email": email, "password": password}),
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          ));
       if (response.data == null) {
         final int statusCode = response.statusCode ?? 500;
         throw ServerException(message: 'no data', statusCode: statusCode);
@@ -67,13 +73,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       required String firstName,
       required String lastName}) async {
     try {
-      final response =
-          await http.post('${newtWork.apiUrl}$_registerEndpoint', data: {
-        "email": email,
-        "password": password,
-        "firstName": firstName,
-        "lastName": lastName
-      });
+      final response = await http.post('${newtWork.apiUrl}$_registerEndpoint',
+          data: convert.jsonEncode({
+            "email": email,
+            "password": password,
+            "firstName": firstName,
+            "lastName": lastName
+          }),
+          options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          ));
       if (response.data == null) {
         final int statusCode = response.statusCode ?? 500;
         throw ServerException(message: 'no data', statusCode: statusCode);

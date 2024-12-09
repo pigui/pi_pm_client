@@ -12,9 +12,10 @@ class UserLogged {
   Stream<String> get refreshToken => _refreshTokenSubject.stream;
   Stream<String> get accessToken => _accessTokenSubject.stream;
 
-  User get userValue => _userSubject.value;
-  String get refreshTokenValue => _refreshTokenSubject.value;
-  String get accessTokenValue => _accessTokenSubject.value;
+  User? get userValue => _userSubject.valueOrNull;
+  bool get isLogged => userValue != null;
+  String? get refreshTokenValue => _refreshTokenSubject.value;
+  String? get accessTokenValue => _accessTokenSubject.value;
 
   void setUser(User user) {
     _userSubject.add(user);

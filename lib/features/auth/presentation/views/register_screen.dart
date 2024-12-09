@@ -8,7 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:pi_pm_client/features/auth/presentation/app/adapters/auth_bloc.dart';
 import 'package:pi_pm_client/features/auth/presentation/views/login_screen.dart';
-import 'package:pi_pm_client/features/auth/presentation/widgets/input_text.dart';
+import 'package:pi_pm_client/features/auth/presentation/widgets/button.dart';
+import 'package:pi_pm_client/features/auth/presentation/widgets/input_text_field.dart';
 import 'package:pi_pm_client/features/home/presentation/views/home_view.dart';
 import 'package:toastification/toastification.dart';
 
@@ -126,7 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20.0),
-                                      child: ElevatedButton(
+                                      child: AuthButton(
                                           onPressed: state is AuthLoading
                                               ? null
                                               : () {
@@ -167,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20.0),
-                                      child: ElevatedButton(
+                                      child: AuthButton(
                                           onPressed: state is AuthLoading
                                               ? null
                                               : () {

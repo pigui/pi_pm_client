@@ -34,7 +34,13 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      redirect: (context, state) => LoginScreen.path,
+      redirect: (context, state) {
+        final logged = sl<UserLogged>();
+        if (logged.isLogged == false) {
+          return LoginScreen.path;
+        }
+        return HomeView.path;
+      },
     ),
     GoRoute(
       path: LoginScreen.path,
