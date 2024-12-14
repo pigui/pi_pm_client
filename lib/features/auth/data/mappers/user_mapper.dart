@@ -8,6 +8,8 @@ class UserMapper {
         email: userModel.email,
         firstName: userModel.firstName,
         lastName: userModel.lastName,
+        role: UserRole(value: userModel.role.value),
+        status: UserStatus(value: userModel.status.value),
         createdAt: userModel.createdAt,
         updatedAt: userModel.updatedAt);
   }
